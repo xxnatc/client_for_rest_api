@@ -53,7 +53,7 @@ salemApp.controller('TownsController', ['$scope', '$http', function($scope, $htt
   var errorMsg = function(msg) {
     if (msg === 'invalid token')
       return $scope.townsWarning = 'Please sign in or register to customize your characters';
-  }
+  };
 
   $scope.createTown = function(newTown) {
     $scope.townsWarning = null;
@@ -129,7 +129,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
   var errorMsg = function(msg) {
     if (msg === 'invalid token')
       return $scope.mafiasWarning = 'Please sign in or register to customize your characters';
-  }
+  };
 
   $scope.createMafia = function(newMafia) {
     $scope.mafiaWarning = null;

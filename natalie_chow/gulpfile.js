@@ -15,7 +15,7 @@ gulp.task('lint', () => {
         'es6': true,
         'node': true,
         'browser': true,
-        'mocha': true
+        'jasmine': true
       },
       'extends': 'eslint:recommended'
     }))
