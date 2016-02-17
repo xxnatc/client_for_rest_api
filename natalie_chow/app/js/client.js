@@ -1,8 +1,8 @@
 const angular = require('angular');
 const salemApp = angular.module('salemApp', []);
 
-salemApp.controller('usersController', ['$scope', '$http', ($scope, $http) => {
-  $scope.signup = (user) => {
+salemApp.controller('UsersController', ['$scope', '$http', function($scope, $http) {
+  $scope.signup = function(user) {
     $scope.authWarning = null;
     $http({
       method: 'POST',
@@ -17,7 +17,7 @@ salemApp.controller('usersController', ['$scope', '$http', ($scope, $http) => {
       });
   };
 
-  $scope.signin = (user) => {
+  $scope.signin = function(user) {
     $scope.authWarning = null;
     $http({
       method: 'GET',
@@ -32,27 +32,30 @@ salemApp.controller('usersController', ['$scope', '$http', ($scope, $http) => {
       });
   };
 
-  $scope.logout = () => {
+  $scope.logout = function() {
     $scope.token = null;
   };
 }]);
 
 
-salemApp.controller('townsController', ['$scope', '$http', ($scope, $http) => {
+salemApp.controller('TownsController', ['$scope', '$http', function($scope, $http) {
   $scope.towns = [];
-  $http.get('http://localhost:3000/api/towns')
-    .then((res) => {
-      $scope.towns = res.data;
-    }, (err) => {
-      console.log(err);
-    });
 
-  function errorMsg(msg) {
+  $scope.getAll = function() {
+    $http.get('http://localhost:3000/api/towns')
+      .then((res) => {
+        $scope.towns = res.data;
+      }, (err) => {
+        console.log(err);
+      });
+  };
+
+  var errorMsg = function(msg) {
     if (msg === 'invalid token')
       return $scope.townsWarning = 'Please sign in or register to customize your characters';
   }
 
-  $scope.createTown = (newTown) => {
+  $scope.createTown = function(newTown) {
     $scope.townsWarning = null;
     if ($scope.token && (typeof newTown.braveness === 'undefined' || newTown.braveness === null))
       newTown.braveness = Math.floor(Math.random() * 101);
@@ -72,7 +75,7 @@ salemApp.controller('townsController', ['$scope', '$http', ($scope, $http) => {
       });
   };
 
-  $scope.deleteTown = (town) => {
+  $scope.deleteTown = function(town) {
     $scope.townsWarning = null;
     $http({
       method: 'DELETE',
@@ -80,20 +83,20 @@ salemApp.controller('townsController', ['$scope', '$http', ($scope, $http) => {
       headers: { 'token': $scope.token }
     })
       .then(() => {
-        $scope.towns = $scope.towns.filter((el) => el !== town);
+        $scope.towns = $scope.towns.filter((el) => el._id !== town._id);
       }, (err) => {
         console.log(err);
         errorMsg(err.data.msg);
       });
   };
 
-  $scope.updateCheck = (town) => {
+  $scope.updateCheck = function(town) {
     if (!$scope.token) return errorMsg('invalid token');
     $scope.townsWarning = null;
     town.editing = true;
   };
 
-  $scope.updateTown = (town) => {
+  $scope.updateTown = function(town) {
     $http({
       method: 'PUT',
       url: 'http://localhost:3000/api/towns/' + town._id,
@@ -111,21 +114,24 @@ salemApp.controller('townsController', ['$scope', '$http', ($scope, $http) => {
 }]);
 
 
-salemApp.controller('mafiasController', ['$scope', '$http', ($scope, $http) => {
+salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $http) {
   $scope.mafias = [];
-  $http.get('http://localhost:3000/api/mafias')
-    .then((res) => {
-      $scope.mafias = res.data;
-    }, (err) => {
-      console.log(err);
-    });
 
-  function errorMsg(msg) {
+  $scope.getAll = function() {
+    $http.get('http://localhost:3000/api/mafias')
+      .then((res) => {
+        $scope.mafias = res.data;
+      }, (err) => {
+        console.log(err);
+      });
+  };
+
+  var errorMsg = function(msg) {
     if (msg === 'invalid token')
       return $scope.mafiasWarning = 'Please sign in or register to customize your characters';
   }
 
-  $scope.createMafia = (newMafia) => {
+  $scope.createMafia = function(newMafia) {
     $scope.mafiaWarning = null;
     if ($scope.token && (typeof newMafia.skill === 'undefined' || newMafia.skill === null))
       newMafia.skill = Math.floor(Math.random() * 101);
@@ -145,7 +151,7 @@ salemApp.controller('mafiasController', ['$scope', '$http', ($scope, $http) => {
       });
   };
 
-  $scope.deleteMafia = (mafia) => {
+  $scope.deleteMafia = function(mafia) {
     $scope.mafiaWarning = null;
     $http({
       method: 'DELETE',
@@ -160,13 +166,13 @@ salemApp.controller('mafiasController', ['$scope', '$http', ($scope, $http) => {
       });
   };
 
-  $scope.updateCheck = (mafia) => {
+  $scope.updateCheck = function(mafia) {
     if (!$scope.token) return errorMsg('invalid token');
     $scope.mafiaWarning = null;
     mafia.editing = true;
   };
 
-  $scope.updateMafia = (mafia) => {
+  $scope.updateMafia = function(mafia) {
     $http({
       method: 'PUT',
       url: 'http://localhost:3000/api/mafias/' + mafia._id,
