@@ -138,7 +138,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
 
     $http({
       method: 'POST',
-      url: 'http://localhost:3000/api/towns',
+      url: 'http://localhost:3000/api/mafias',
       headers: { 'token': $scope.token },
       data: newMafia
     })
@@ -159,7 +159,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
       headers: { 'token': $scope.token }
     })
       .then(() => {
-        $scope.mafias = $scope.mafias.filter((el) => el !== mafia);
+        $scope.mafias = $scope.mafias.filter((el) => el._id !== mafia._id);
       }, (err) => {
         console.log(err);
         errorMsg(err.data.msg);
