@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body data-ng-app="salemApp">
-    <main data-ng-controller="usersController" class="container">
+    <main data-ng-controller="UsersController" class="container">
       <h1>Town of Salem API</h1>
 
       <aside>
@@ -41,7 +41,7 @@
         </section>
       </aside>
 
-      <section data-ng-controller="townsController">
+      <section data-ng-controller="TownsController" data-ng-init="getAll()">
         <h2>Towns</h2>
         <div>
           <div data-ng-if="townsWarning" class="alert alert-danger" role="alert">{{townsWarning}}</div>
@@ -94,7 +94,7 @@
         </form>
       </section>
 
-      <section data-ng-controller="mafiasController">
+      <section data-ng-controller="MafiasController" data-ng-init="getAll()">
         <h2>Mafias</h2>
         <div>
           <div data-ng-if="mafiasWarning" class="alert alert-danger" role="alert">{{mafiasWarning}}</div>
@@ -145,8 +145,9 @@
             <legend>Create a new mafia</legend>
             <input data-ng-model="newMafia.name" type="text" placeholder="Name" required="true" class="form-control">
             <input data-ng-model="newMafia.age" type="number" placeholder="Age" class="form-control">
-            <input data-ng-model="newMafia.occupation" type="text" placeholder="Occupation" class="form-control">
-            <input data-ng-model="newMafia.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
+            <input data-ng-model="newMafia.rank" type="text" placeholder="Rank" class="form-control">
+            <input data-ng-model="newMafia.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
+            <input data-ng-model="newMafia.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
             <button type="submit" name="create" class="btn">Create</button>
           </fieldset>
         </form>
