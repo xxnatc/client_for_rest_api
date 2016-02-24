@@ -5,19 +5,23 @@
     <title>Town of Salem</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
+
   <body data-ng-app="salemApp">
+    <header class="jumbotron">
+      <section class="container">
+        <h1>Town of Salem API</h1>
+      </section>
+    </header>
+
     <main data-ng-controller="UsersController" class="container">
-      <h1>Town of Salem API</h1>
+      <aside class="user-auth">
+        <section data-ng-if="!token">
+          <div data-ng-if="authWarning" class="alert alert-danger" role="alert">{{authWarning}}</div>
 
-      <aside>
-        <section data-ng-if="!token" class="row">
-          <div class="col-xs-12">
-            <div data-ng-if="authWarning" class="alert alert-danger" role="alert">{{authWarning}}</div>
-          </div>
-
-          <form data-ng-submit="signup(newUser)" class="col-sm-6 form-inline">
+          <form data-ng-submit="signup(newUser)" class="form">
             <fieldset>
               <legend>New user</legend>
               <input data-ng-model="newUser.email" type="text" placeholder="email" class="form-control">
@@ -26,7 +30,7 @@
             </fieldset>
           </form>
 
-          <form data-ng-submit="signin(user)"  class="col-sm-6 form-inline">
+          <form data-ng-submit="signin(user)"  class="form">
             <fieldset>
               <legend>Returning user</legend>
               <input data-ng-model="user.email" type="text" placeholder="email" class="form-control">
@@ -37,123 +41,141 @@
         </section>
 
         <section data-ng-if="token">
-          <h3>You're logged in!</h3>
+          <p>Welcome, user!</p>
           <button data-ng-click="logout()" type="button" class="btn btn-default">Log out</button>
         </section>
       </aside>
 
-      <section data-ng-controller="TownsController" data-ng-init="getAll()">
-        <h2>Towns</h2>
-        <div>
+      <aside class="info-sidebar" data-ng-controller="NonCrudController" data-ng-init="census()">
+        <h4>Current population</h4>
+        <p class="info-subhead">Towns</p>
+        <p class="info-number">{{population.towns}}</p>
+        <p class="info-subhead">Mafias</p>
+        <p class="info-number">{{population.mafias}}</p>
+        <p class="info-subhead">Total</p>
+        <p class="info-number">{{population.totalPopulation}}</p>
+        <button data-ng-click="census()" type="button" name="refresh" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-refresh"></span></button>
+      </aside>
+
+      <section class="primary-content">
+        <article data-ng-controller="TownsController" data-ng-init="getAll()" class="resource">
+          <h2>Towns</h2>
           <div data-ng-if="townsWarning" class="alert alert-danger" role="alert">{{townsWarning}}</div>
-        </div>
-        <table class="table table-bordered table-hover table-resource">
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Occupation</th>
-            <th>Braveness</th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr data-ng-repeat="town in towns">
-            <td data-ng-if="!town.editing">{{town.name}}</td>
-            <td data-ng-if="!town.editing">{{town.age}}</td>
-            <td data-ng-if="!town.editing">{{town.occupation}}</td>
-            <td data-ng-if="!town.editing">{{town.braveness}}</td>
 
-            <td data-ng-if="town.editing">
-              <input data-ng-model="town.name" type="text" placeholder="Name" required="true">
-            </td>
-            <td data-ng-if="town.editing">
-              <input data-ng-model="town.age" type="number" placeholder="Age">
-            </td>
-            <td data-ng-if="town.editing">
-              <input data-ng-model="town.occupation" type="text" placeholder="Occupation">
-            </td>
-            <td data-ng-if="town.editing">
-              <input data-ng-model="town.braveness" type="number" placeholder="Braveness" min="0" max="100">
-            </td>
-            <td>
-              <button data-ng-if="!town.editing" data-ng-click="updateCheck(town)" type="button" name="edit" class="btn btn-default btn-table"><span class="glyphicon glyphicon-pencil"></span></button>
-              <button data-ng-if="town.editing" data-ng-click="updateTown(town)" type="button" name="save" class="btn btn-default btn-table"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-            </td>
+          <table class="table table-bordered table-hover table-resource">
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Occupation</th>
+              <th>Braveness</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr data-ng-repeat="town in towns">
+              <td data-ng-if="!town.editing">{{town.name}}</td>
+              <td data-ng-if="!town.editing">{{town.age}}</td>
+              <td data-ng-if="!town.editing">{{town.occupation}}</td>
+              <td data-ng-if="!town.editing">{{town.braveness}}</td>
 
-            <td><button data-ng-click="deleteTown(town)" type="button" name="delete" class="btn btn-default btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
-          </tr>
-        </table>
+              <td data-ng-if="town.editing">
+                <input data-ng-model="town.name" type="text" placeholder="Name" required="true">
+              </td>
+              <td data-ng-if="town.editing">
+                <input data-ng-model="town.age" type="number" placeholder="Age">
+              </td>
+              <td data-ng-if="town.editing">
+                <input data-ng-model="town.occupation" type="text" placeholder="Occupation">
+              </td>
+              <td data-ng-if="town.editing">
+                <input data-ng-model="town.braveness" type="number" placeholder="Braveness" min="0" max="100">
+              </td>
+              <td>
+                <button data-ng-if="!town.editing" data-ng-click="updateCheck(town)" type="button" name="edit" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button data-ng-if="town.editing" data-ng-click="updateTown(town)" type="button" name="save" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+              </td>
 
-        <form data-ng-submit="createTown(newTown)" class="form-inline">
-          <fieldset>
-            <legend>Create a new town</legend>
-            <input data-ng-model="newTown.name" type="text" placeholder="Name" required="true" class="form-control">
-            <input data-ng-model="newTown.age" type="number" placeholder="Age" class="form-control">
-            <input data-ng-model="newTown.occupation" type="text" placeholder="Occupation" class="form-control">
-            <input data-ng-model="newTown.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
-            <button type="submit" name="create" class="btn btn-default">Create</button>
-          </fieldset>
-        </form>
-      </section>
+              <td><button data-ng-click="deleteTown(town)" type="button" name="delete" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+          </table>
 
-      <section data-ng-controller="MafiasController" data-ng-init="getAll()">
-        <h2>Mafias</h2>
-        <div>
+          <form data-ng-submit="createTown(newTown)" class="form-inline form-create">
+            <fieldset>
+              <legend>Create a new town</legend>
+              <input data-ng-model="newTown.name" type="text" placeholder="Name" required="true" class="form-control">
+              <input data-ng-model="newTown.age" type="number" placeholder="Age" class="form-control">
+              <input data-ng-model="newTown.occupation" type="text" placeholder="Occupation" class="form-control">
+              <input data-ng-model="newTown.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
+              <button type="submit" name="create" class="btn btn-default">Create</button>
+            </fieldset>
+          </form>
+        </article>
+
+        <article data-ng-controller="MafiasController" data-ng-init="getAll()" class="resource">
+          <h2>Mafias</h2>
           <div data-ng-if="mafiasWarning" class="alert alert-danger" role="alert">{{mafiasWarning}}</div>
-        </div>
-        <table class="table table-bordered table-hover table-resource">
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Rank</th>
-            <th>Skill level</th>
-            <th>Weapon of choice</th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr data-ng-repeat="mafia in mafias">
-            <td data-ng-if="!mafia.editing">{{mafia.name}}</td>
-            <td data-ng-if="!mafia.editing">{{mafia.age}}</td>
-            <td data-ng-if="!mafia.editing">{{mafia.rank}}</td>
-            <td data-ng-if="!mafia.editing">{{mafia.skill}}</td>
-            <td data-ng-if="!mafia.editing">{{mafia.weaponOfChoice}}</td>
 
-            <td data-ng-if="mafia.editing">
-              <input data-ng-model="mafia.name" type="text" placeholder="Name" required="true">
-            </td>
-            <td data-ng-if="mafia.editing">
-              <input data-ng-model="mafia.age" type="number" placeholder="Age">
-            </td>
-            <td data-ng-if="mafia.editing">
-              <input data-ng-model="mafia.rank" type="text" placeholder="Rank">
-            </td>
-            <td data-ng-if="mafia.editing">
-              <input data-ng-model="mafia.skill" type="number" placeholder="Skill level" min="0" max="100">
-            </td>
-            <td data-ng-if="mafia.editing">
-              <input data-ng-model="mafia.weaponOfChoice" type="text" placeholder="Weapon">
-            </td>
-            <td>
-              <button data-ng-if="!mafia.editing" data-ng-click="updateCheck(mafia)" type="button" name="edit" class="btn btn-default btn-table"><span class="glyphicon glyphicon-pencil"></span></button>
-              <button data-ng-if="mafia.editing" data-ng-click="updateMafia(mafia)" type="button" name="save" class="btn btn-default btn-table"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-            </td>
+          <table class="table table-bordered table-hover table-resource">
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Rank</th>
+              <th>Skill level</th>
+              <th>Weapon of choice</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr data-ng-repeat="mafia in mafias">
+              <td data-ng-if="!mafia.editing">{{mafia.name}}</td>
+              <td data-ng-if="!mafia.editing">{{mafia.age}}</td>
+              <td data-ng-if="!mafia.editing">{{mafia.rank}}</td>
+              <td data-ng-if="!mafia.editing">{{mafia.skill}}</td>
+              <td data-ng-if="!mafia.editing">{{mafia.weaponOfChoice}}</td>
 
-            <td><button data-ng-click="deleteMafia(mafia)" type="button" name="delete" class="btn btn-default btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
-          </tr>
-        </table>
+              <td data-ng-if="mafia.editing">
+                <input data-ng-model="mafia.name" type="text" placeholder="Name" required="true">
+              </td>
+              <td data-ng-if="mafia.editing">
+                <input data-ng-model="mafia.age" type="number" placeholder="Age">
+              </td>
+              <td data-ng-if="mafia.editing">
+                <input data-ng-model="mafia.rank" type="text" placeholder="Rank">
+              </td>
+              <td data-ng-if="mafia.editing">
+                <input data-ng-model="mafia.skill" type="number" placeholder="Skill level" min="0" max="100">
+              </td>
+              <td data-ng-if="mafia.editing">
+                <input data-ng-model="mafia.weaponOfChoice" type="text" placeholder="Weapon">
+              </td>
+              <td>
+                <button data-ng-if="!mafia.editing" data-ng-click="updateCheck(mafia)" type="button" name="edit" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button data-ng-if="mafia.editing" data-ng-click="updateMafia(mafia)" type="button" name="save" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+              </td>
 
-        <form data-ng-submit="createMafia(newMafia)" class="form-inline">
-          <fieldset>
-            <legend>Create a new mafia</legend>
-            <input data-ng-model="newMafia.name" type="text" placeholder="Name" required="true" class="form-control">
-            <input data-ng-model="newMafia.age" type="number" placeholder="Age" class="form-control">
-            <input data-ng-model="newMafia.rank" type="text" placeholder="Rank" class="form-control">
-            <input data-ng-model="newMafia.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
-            <input data-ng-model="newMafia.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
-            <button type="submit" name="create" class="btn btn-default">Create</button>
-          </fieldset>
-        </form>
+              <td><button data-ng-click="deleteMafia(mafia)" type="button" name="delete" class="btn btn-default btn-icon"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+          </table>
+
+          <form data-ng-submit="createMafia(newMafia)" class="form-inline form-create">
+            <fieldset>
+              <legend>Create a new mafia</legend>
+              <input data-ng-model="newMafia.name" type="text" placeholder="Name" required="true" class="form-control">
+              <input data-ng-model="newMafia.age" type="number" placeholder="Age" class="form-control">
+              <input data-ng-model="newMafia.rank" type="text" placeholder="Rank" class="form-control">
+              <input data-ng-model="newMafia.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
+              <input data-ng-model="newMafia.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
+              <button type="submit" name="create" class="btn btn-default">Create</button>
+            </fieldset>
+          </form>
+        </article>
       </section>
+
     </main>
+
+    <footer>
+      <section class="container">
+        Extremely useful footer content
+      </section>
+    </footer>
 
     <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
   </body>
