@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Town of Salem</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body data-ng-app="salemApp">
     <main data-ng-controller="UsersController" class="container">
@@ -78,7 +79,7 @@
               <button data-ng-if="town.editing" data-ng-click="updateTown(town)" type="button" name="save" class="btn btn-default btn-table"><span class="glyphicon glyphicon-floppy-disk"></span></button>
             </td>
 
-            <td><button data-ng-click="deleteTown(town)" type="button" name="delete" class="btn btn-danger btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
+            <td><button data-ng-click="deleteTown(town)" type="button" name="delete" class="btn btn-default btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
           </tr>
         </table>
 
@@ -89,7 +90,7 @@
             <input data-ng-model="newTown.age" type="number" placeholder="Age" class="form-control">
             <input data-ng-model="newTown.occupation" type="text" placeholder="Occupation" class="form-control">
             <input data-ng-model="newTown.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
-            <button type="submit" name="create" class="btn">Create</button>
+            <button type="submit" name="create" class="btn btn-default">Create</button>
           </fieldset>
         </form>
       </section>
@@ -136,7 +137,7 @@
               <button data-ng-if="mafia.editing" data-ng-click="updateMafia(mafia)" type="button" name="save" class="btn btn-default btn-table"><span class="glyphicon glyphicon-floppy-disk"></span></button>
             </td>
 
-            <td><button data-ng-click="deleteMafia(mafia)" type="button" name="delete" class="btn btn-danger btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
+            <td><button data-ng-click="deleteMafia(mafia)" type="button" name="delete" class="btn btn-default btn-table"><span class="glyphicon glyphicon-trash"></span></button></td>
           </tr>
         </table>
 
@@ -148,7 +149,7 @@
             <input data-ng-model="newMafia.rank" type="text" placeholder="Rank" class="form-control">
             <input data-ng-model="newMafia.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
             <input data-ng-model="newMafia.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
-            <button type="submit" name="create" class="btn">Create</button>
+            <button type="submit" name="create" class="btn btn-default">Create</button>
           </fieldset>
         </form>
       </section>

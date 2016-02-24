@@ -19,6 +19,7 @@ salemApp.controller('UsersController', ['$scope', '$http', function($scope, $htt
 
   $scope.signin = function(user) {
     $scope.authWarning = null;
+    if (!user) return $scope.authWarning = 'Please enter email and password';
     $http({
       method: 'GET',
       url: 'http://localhost:3000/api/signin',
@@ -132,7 +133,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
   };
 
   $scope.createMafia = function(newMafia) {
-    $scope.mafiaWarning = null;
+    $scope.mafiasWarning = null;
     if ($scope.token && (typeof newMafia.skill === 'undefined' || newMafia.skill === null))
       newMafia.skill = Math.floor(Math.random() * 101);
 
@@ -152,7 +153,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
   };
 
   $scope.deleteMafia = function(mafia) {
-    $scope.mafiaWarning = null;
+    $scope.mafiasWarning = null;
     $http({
       method: 'DELETE',
       url: 'http://localhost:3000/api/mafias/' + mafia._id,
@@ -168,7 +169,7 @@ salemApp.controller('MafiasController', ['$scope', '$http', function($scope, $ht
 
   $scope.updateCheck = function(mafia) {
     if (!$scope.token) return errorMsg('invalid token');
-    $scope.mafiaWarning = null;
+    $scope.mafiasWarning = null;
     mafia.editing = true;
   };
 

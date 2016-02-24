@@ -44,7 +44,7 @@ describe('Mafias controller', () => {
       $httpBackend.expectPOST('http://localhost:3000/api/mafias', reqData)
         .respond(200, { name: 'response mafia' });
 
-      $scope.mafiaWarning = 'some warning';
+      $scope.mafiasWarning = 'some warning';
       $scope.newMafia = { name: 'new mafia' };
       $scope.createMafia(reqData);
       $httpBackend.flush();
@@ -52,20 +52,20 @@ describe('Mafias controller', () => {
       expect($scope.mafias.length).toBe(1);
       expect($scope.mafias[0].name).toBe('response mafia');
       expect($scope.newMafia).toBe(null);
-      expect($scope.mafiaWarning).toBe(null);
+      expect($scope.mafiasWarning).toBe(null);
     });
 
     it('should be able to make a DELETE request', () => {
       $httpBackend.expectDELETE('http://localhost:3000/api/mafias/testid')
         .respond(200);
 
-      $scope.mafiaWarning = 'some warning';
+      $scope.mafiasWarning = 'some warning';
       $scope.mafias = [{ _id: 'testid' }, { _id: 'thisonestays' }];
       $scope.deleteMafia({ _id: 'testid' });
       $httpBackend.flush();
 
       expect($scope.mafias.length).toBe(1);
-      expect($scope.mafiaWarning).toBe(null);
+      expect($scope.mafiasWarning).toBe(null);
     });
 
     it('should be able to make a PUT request', () => {
