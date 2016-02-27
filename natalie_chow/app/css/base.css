@@ -51,14 +51,20 @@ table {
 /* ===================== Base Styles ===================== */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic);
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: Arial, sans-serif;
+  margin-bottom: 70px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  margin: 0.6em 0 0.3em 0;
+  margin-bottom: 0.5em;
   color: #063E53;
 }
 
@@ -68,13 +74,10 @@ h3 { font-size: 1.333em; }
 
 main {
   margin: 10px 0px 20px 0px;
-  max-width: 939px;
 }
 
 aside {
-  background-color: #029BC2;
   padding: 16px;
-  border-radius: 6px;
 }
 
 fieldset legend {
@@ -85,11 +88,6 @@ fieldset legend {
   margin-bottom: 0.6em;
 }
 
-aside fieldset legend {
-  color: white;
-  padding-bottom: 0px;
-}
-
 table input {
   width: 100%;
 }
@@ -98,6 +96,14 @@ table th {
   font-weight: bold;
 }
 
-main>section {
-  margin-top: 2em;
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #EEE;
+  padding-top: 1.6em;
+  font-size: 0.8em;
+  text-align: center;
+  color: #777;
 }

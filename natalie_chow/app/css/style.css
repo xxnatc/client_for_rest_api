@@ -1,4 +1,38 @@
-.btn-table {
+.jumbotron h1 {
+  text-align: center;
+  color: white;
+  font-size: 3.158em;
+  margin-bottom: 0px;
+}
+
+.user-auth form {
+  margin-bottom: 1.5em;
+}
+
+.user-auth form input,
+.form-create input,
+.form-create button {
+  margin-bottom: 0.4em;
+}
+
+.info-subhead {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  margin-top: 0.7em;
+  margin-bottom: 0.3em;
+}
+
+.info-number {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 2.369em;
+}
+
+.info-sidebar .btn-icon {
+  margin-top: 0.7em;
+}
+
+.btn-icon {
   padding: 3px 8px;
 }
 
