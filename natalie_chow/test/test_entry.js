@@ -14,3 +14,4 @@ require(__dirname + '/directives/town_display_directive_test.js');
 require(__dirname + '/directives/mafia_display_directive_test.js');
 require(__dirname + '/directives/town_create_directive_test.js');
 require(__dirname + '/directives/mafia_create_directive_test.js');
+require(__dirname + '/directives/warning_directive_test.js');
