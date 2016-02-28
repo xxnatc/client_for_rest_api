@@ -14,7 +14,7 @@ describe('Resource service', () => {
   });
 
   it('should assign something to the resource', () => {
-    expect(Resource('/test').baseUrl).toBe('http://localhost:3000/api/test')
+    expect(Resource('/test').baseUrl).toBe('http://localhost:3000/api/test');
   });
 
   describe('an instance of resource', () => {
@@ -30,8 +30,8 @@ describe('Resource service', () => {
     it('should be able to handle an error', () => {
       $httpBackend.expectGET('http://localhost:3000/api/test')
         .respond(400);
-      var called = false;
 
+      var called = false;
       Resource('/test').read().catch((err) => {
         expect(typeof err).toBe('object');
         called = true;
@@ -43,8 +43,8 @@ describe('Resource service', () => {
     it('should be able to make a GET request', () => {
       $httpBackend.expectGET('http://localhost:3000/api/test')
         .respond(200, [{ name: 'bilbo' }]);
-      var called = false;
 
+      var called = false;
       Resource('/test').read().then((res) => {
         expect(res.data[0].name).toBe('bilbo');
         called = true;

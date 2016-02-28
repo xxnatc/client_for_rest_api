@@ -17,7 +17,7 @@ module.exports = function(app) {
         return $scope.townsWarning = 'Please sign in or register to customize your characters';
     }
 
-    function handleError(err, display) {
+    function handleError(err) {
       console.log(err);
       errorMsg(err.data.msg);
     }
