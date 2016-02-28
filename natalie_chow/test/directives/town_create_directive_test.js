@@ -33,7 +33,7 @@ describe('Town create directive', () => {
       testScope.townData = input;
     };
 
-    var element = $compile('<town-create data-town-data="{name: \'inside directive\'}"" data-form-submit=testSubmit><town-create>')(testScope);
+    var element = $compile('<town-create data-town-data="{name: \'inside directive\'}" data-form-submit=testSubmit><town-create>')(testScope);
 
     $httpBackend.flush();
     $rootScope.$digest();

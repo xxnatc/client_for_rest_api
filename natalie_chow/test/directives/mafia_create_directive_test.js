@@ -1,7 +1,7 @@
 var angular = require('angular');
 var template = require('../../app/templates/mafia_create_directive.html');
 
-describe('Town create directive', () => {
+describe('Mafia create directive', () => {
   var $compile, $rootScope, $httpBackend;
 
   beforeEach(angular.mock.module('salemApp'));
@@ -33,7 +33,7 @@ describe('Town create directive', () => {
       testScope.mafiaData = input;
     };
 
-    var element = $compile('<mafia-create data-mafia-data="{name: \'inside directive\'}"" data-form-submit=testSubmit><mafia-create>')(testScope);
+    var element = $compile('<mafia-create data-mafia-data="{name: \'inside directive\'}" data-form-submit=testSubmit><mafia-create>')(testScope);
 
     $httpBackend.flush();
     $rootScope.$digest();

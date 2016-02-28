@@ -33,7 +33,7 @@ describe('User form directive', () => {
       testScope.user = input;
     };
 
-    var element = $compile('<user-form data-user="{email: \'inside directive\'}"" data-form-submit=testSubmit><user-form>')(testScope);
+    var element = $compile('<user-form data-user="{email: \'inside directive\'}" data-form-submit=testSubmit><user-form>')(testScope);
 
     $httpBackend.flush();
     $rootScope.$digest();
