@@ -5,10 +5,10 @@ module.exports = function(app) {
       replace: true,
       templateUrl: '/templates/user_form_directive.html',
       scope: {
+        user: '=',
         formLegend: '@',
         buttonText: '@',
-        user: '=',
-        save: '&'
+        formSubmit: '&'
       },
       controller: function($scope) {
         $scope.user = $scope.user;

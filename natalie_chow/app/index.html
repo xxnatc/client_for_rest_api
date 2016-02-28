@@ -22,17 +22,17 @@
           <div data-ng-if="authWarning" class="alert alert-danger" role="alert">{{authWarning}}</div>
 
           <user-form
+            data-user="newUser"
             data-form-legend="New user"
             data-button-text="Register"
-            data-user="newUser"
-            data-save="signup(newUser)"
+            data-form-submit="signup(newUser)"
           ></user-form>
 
           <user-form
+            data-user="user"
             data-form-legend="Returning user"
             data-button-text="Login"
-            data-user="user"
-            data-save="signin(user)"
+            data-form-submit="signin(user)"
           ></user-form>
         </section>
 
@@ -81,16 +81,11 @@
             </tbody>
           </table>
 
-          <form data-ng-submit="createTown(newTown)" class="form-inline form-create">
-            <fieldset>
-              <legend>Create a new town</legend>
-              <input data-ng-model="newTown.name" type="text" placeholder="Name" required="true" class="form-control">
-              <input data-ng-model="newTown.age" type="number" placeholder="Age" class="form-control">
-              <input data-ng-model="newTown.occupation" type="text" placeholder="Occupation" class="form-control">
-              <input data-ng-model="newTown.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
-              <button type="submit" name="create" class="btn btn-default">Create</button>
-            </fieldset>
-          </form>
+          <town-create
+            data-town-data="newTown"
+            data-form-legend="Create a new town"
+            data-form-submit="createTown(newTown)"
+          ></town-create>
         </article>
 
         <article data-ng-controller="MafiasController" data-ng-init="getAll()" class="resource">
@@ -121,17 +116,12 @@
             </tbody>
           </table>
 
-          <form data-ng-submit="createMafia(newMafia)" class="form-inline form-create">
-            <fieldset>
-              <legend>Create a new mafia</legend>
-              <input data-ng-model="newMafia.name" type="text" placeholder="Name" required="true" class="form-control">
-              <input data-ng-model="newMafia.age" type="number" placeholder="Age" class="form-control">
-              <input data-ng-model="newMafia.rank" type="text" placeholder="Rank" class="form-control">
-              <input data-ng-model="newMafia.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
-              <input data-ng-model="newMafia.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
-              <button type="submit" name="create" class="btn btn-default">Create</button>
-            </fieldset>
-          </form>
+          <mafia-create
+            data-mafia-data="newMafia"
+            data-form-legend="Create a new mafia"
+            data-form-submit="createMafia(newMafia)"
+          ></mafia-create>
+
         </article>
       </section>
 
