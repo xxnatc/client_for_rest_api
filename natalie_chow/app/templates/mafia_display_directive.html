@@ -1,0 +1,38 @@
+<td data-ng-if="!mafiaData.editing">{{mafiaData.name}}</td>
+<td data-ng-if="!mafiaData.editing">{{mafiaData.age}}</td>
+<td data-ng-if="!mafiaData.editing">{{mafiaData.rank}}</td>
+<td data-ng-if="!mafiaData.editing">{{mafiaData.skill}}</td>
+<td data-ng-if="!mafiaData.editing">{{mafiaData.weaponOfChoice}}</td>
+
+<td data-ng-if="mafiaData.editing">
+  <input data-ng-model="mafiaData.name" type="text" placeholder="Name" required="true">
+</td>
+<td data-ng-if="mafiaData.editing">
+  <input data-ng-model="mafiaData.age" type="number" placeholder="Age">
+</td>
+<td data-ng-if="mafiaData.editing">
+  <input data-ng-model="mafiaData.rank" type="text" placeholder="Rank">
+</td>
+<td data-ng-if="mafiaData.editing">
+  <input data-ng-model="mafiaData.skill" type="number" placeholder="Skill level" min="0" max="100">
+</td>
+<td data-ng-if="mafiaData.editing">
+  <input data-ng-model="mafiaData.weaponOfChoice" type="text" placeholder="Weapon">
+</td>
+
+<td>
+  <button data-ng-if="!mafiaData.editing" data-ng-click="showForm(mafiaData)" 
+    type="button" name="edit" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </button>
+  <button data-ng-if="mafiaData.editing" data-ng-click="updateChar(mafiaData)" type="button" name="save" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-floppy-disk"></span>
+  </button>
+</td>
+
+<td>
+  <button data-ng-click="deleteChar(mafiaData)"
+    type="button" name="delete" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+</td>

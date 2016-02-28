@@ -1,0 +1,35 @@
+<td data-ng-if="!townData.editing">{{townData.name}}</td>
+<td data-ng-if="!townData.editing">{{townData.age}}</td>
+<td data-ng-if="!townData.editing">{{townData.occupation}}</td>
+<td data-ng-if="!townData.editing">{{townData.braveness}}</td>
+
+<td data-ng-if="townData.editing">
+  <input data-ng-model="townData.name" type="text" placeholder="Name" required="true">
+</td>
+<td data-ng-if="townData.editing">
+  <input data-ng-model="townData.age" type="number" placeholder="Age">
+</td>
+<td data-ng-if="townData.editing">
+  <input data-ng-model="townData.occupation" type="text" placeholder="Occupation">
+</td>
+<td data-ng-if="townData.editing">
+  <input data-ng-model="townData.braveness" type="number" placeholder="Braveness" min="0" max="100">
+</td>
+
+<td>
+  <button data-ng-if="!townData.editing" data-ng-click="showForm(townData)"
+    type="button" name="edit" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </button>
+  <button data-ng-if="townData.editing" data-ng-click="updateChar(townData)"
+    type="button" name="save" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-floppy-disk"></span>
+  </button>
+</td>
+
+<td>
+  <button data-ng-click="deleteChar(townData)"
+    type="button" name="delete" class="btn btn-default btn-icon">
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+</td>
