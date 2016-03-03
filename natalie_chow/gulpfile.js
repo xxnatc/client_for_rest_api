@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const webpack = require('webpack-stream');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('lint', () => {
   return gulp.src(['**/*.js', '!**/node_modules/*', '!**/build/*', '!**/*bundle.js'])
@@ -27,8 +29,11 @@ gulp.task('html:dev', () => {
     .pipe(gulp.dest(__dirname + '/build'));
 });
 
-gulp.task('css:dev', () => {
-  gulp.src(__dirname + '/app/**/*.css')
+gulp.task('sass:dev', () => {
+  gulp.src(__dirname + '/app/scss/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(__dirname + '/build'));
 });
 
@@ -63,7 +68,7 @@ gulp.task('webpack:test', () => {
     .pipe(gulp.dest('test/'));
 });
 
-gulp.task('build:dev', ['html:dev', 'css:dev', 'webpack:dev']);
+gulp.task('build:dev', ['html:dev', 'sass:dev', 'webpack:dev']);
 
 gulp.task('watch', () => {
   gulp.watch('./app/*', ['build:dev']);

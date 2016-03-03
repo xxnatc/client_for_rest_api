@@ -1,14 +1,10 @@
-.jumbotron {
-  background-color: #029BC2;
-}
-
 main {
   display: flex;
   align-items: flex-start;
 }
 
 .user-auth {
-  background-color: #EEE;
+  background-color: $color-light-gray;
   border-radius: 6px;
   margin-right: 0.5em;
   order: 1;
@@ -20,7 +16,7 @@ main {
   margin-left: 0.5em;
   order: 3;
   flex-basis: 20%;
-  border-left: 1px solid #DDD;
+  border-left: 1px solid $color-mid-gray;
   text-align: center;
 }
 
@@ -30,6 +26,8 @@ main {
   padding: 12px 12px 0px 12px;
 }
 
-article:not(:last-child) {
-  margin-bottom: 2em;
+article {
+  &:not(:last-child) {
+    margin-bottom: 2em;
+  }
 }
