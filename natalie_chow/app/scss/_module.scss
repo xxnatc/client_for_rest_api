@@ -1,0 +1,50 @@
+.jumbotron {
+  background-color: $color-cyan;
+  h1 {
+    text-align: center;
+    color: white;
+    font-size: 3.158em;
+    margin-bottom: 0px;
+  }
+}
+
+.user-auth {
+  form {
+    margin-bottom: 1.5em;
+    input {
+      margin-bottom: 0.4em;
+    }
+  }
+}
+
+.form-create {
+  input, button {
+    margin-bottom: 0.4em;
+  }
+}
+
+.info-sidebar {
+  .info-subhead {
+    @include custom-font;
+    text-transform: uppercase;
+    margin-top: 0.7em;
+    margin-bottom: 0.3em;
+  }
+
+  .info-number {
+    @include custom-font(600);
+    font-size: 2.369em;
+  }
+
+  .btn-icon {
+    margin-top: 0.7em;
+  }
+}
+
+.btn-icon {
+  padding: 3px 8px;
+}
+
+.table.table-resource td {
+  vertical-align: middle;
+}
