@@ -51,6 +51,17 @@ table {
 /* ===================== Base Styles ===================== */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic);
 
+$color-cyan: #029BC2;
+$color-navy: #063E53;
+$color-light-gray: #EEE;
+$color-mid-gray: #DDD;
+$color-dark-gray: #777;
+
+@mixin custom-font ($weight: 400) {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: $weight;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -62,10 +73,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+  @include custom-font(600);
   margin-bottom: 0.5em;
-  color: #063E53;
+  color: $color-navy;
 }
 
 h1 { font-size: 2.369em; }
@@ -81,19 +91,20 @@ aside {
 }
 
 fieldset legend {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+  @include custom-font(600);
   padding-bottom: 0.6em;
-  border-bottom: 1px solid #029BC2;
+  border-bottom: 1px solid $color-cyan;
   margin-bottom: 0.6em;
 }
 
-table input {
-  width: 100%;
-}
+table {
+  input {
+    width: 100%;
+  }
 
-table th {
-  font-weight: bold;
+  th {
+    font-weight: bold;
+  }
 }
 
 footer {
@@ -101,9 +112,9 @@ footer {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: #EEE;
+  background-color: $color-light-gray;
   padding-top: 1.6em;
   font-size: 0.8em;
   text-align: center;
-  color: #777;
+  color: $color-dark-gray;
 }
