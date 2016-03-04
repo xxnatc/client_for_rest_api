@@ -1,0 +1,8 @@
+<form data-ng-submit="formSubmit(user)" class="form">
+  <fieldset>
+    <legend>{{formLegend}}</legend>
+    <input data-ng-model="user.email" type="text" placeholder="email" class="form-control">
+    <input data-ng-model="user.password" type="password" name="password" placeholder="password" class="form-control">
+    <button type="submit" name="register" class="btn btn-default">{{buttonText}}</button>
+  </fieldset>
+</form>

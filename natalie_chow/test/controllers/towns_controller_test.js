@@ -1,6 +1,4 @@
-require(__dirname + '/../app/js/client');
 var angular = require('angular');
-require('angular-mocks');
 
 describe('Towns controller', () => {
   var $httpBackend, $scope, $ControllerConstructor;

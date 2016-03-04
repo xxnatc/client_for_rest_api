@@ -1,0 +1,10 @@
+<form data-ng-submit="formSubmit(townData)" class="form-inline form-create">
+  <fieldset>
+    <legend>{{formLegend}}</legend>
+    <input data-ng-model="townData.name" type="text" placeholder="Name" required="true" class="form-control">
+    <input data-ng-model="townData.age" type="number" placeholder="Age" class="form-control">
+    <input data-ng-model="townData.occupation" type="text" placeholder="Occupation" class="form-control">
+    <input data-ng-model="townData.braveness" type="number" placeholder="Braveness" min="0" max="100" class="form-control">
+    <button type="submit" name="create" class="btn btn-default">Create</button>
+  </fieldset>
+</form>

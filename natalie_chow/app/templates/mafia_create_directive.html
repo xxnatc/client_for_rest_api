@@ -1,0 +1,11 @@
+<form data-ng-submit="formSubmit(mafiaData)" class="form-inline form-create">
+  <fieldset>
+    <legend>{{formLegend}}</legend>
+    <input data-ng-model="mafiaData.name" type="text" placeholder="Name" required="true" class="form-control">
+    <input data-ng-model="mafiaData.age" type="number" placeholder="Age" class="form-control">
+    <input data-ng-model="mafiaData.rank" type="text" placeholder="Rank" class="form-control">
+    <input data-ng-model="mafiaData.skill" type="number" placeholder="Skill" min="0" max="100" class="form-control">
+    <input data-ng-model="mafiaData.weaponOfChoice" type="text" placeholder="Weapon" class="form-control">
+    <button type="submit" name="create" class="btn btn-default">Create</button>
+  </fieldset>
+</form>
