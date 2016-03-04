@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.controller('TownsController', ['$scope', '$http', 'Resource', function($scope, $http, Resource) {
+  app.controller('TownsController', ['$scope', '$http', 'salemAuth', 'Resource', function($scope, $http, salemAuth, Resource) {
     var townService = Resource('/towns');
     $scope.towns = [];
 
@@ -24,10 +24,10 @@ module.exports = function(app) {
 
     $scope.createTown = function(newTown) {
       $scope.townsWarning = null;
-      if ($scope.token && (typeof newTown.braveness === 'undefined' || newTown.braveness === null))
+      if (salemAuth.getToken() && (typeof newTown.braveness === 'undefined' || newTown.braveness === null))
         newTown.braveness = Math.floor(Math.random() * 101);
 
-      townService.create(newTown, $scope.token)
+      townService.create(newTown)
         .then((res) => {
           $scope.towns.push(res.data);
           $scope.newTown = null;
@@ -36,20 +36,20 @@ module.exports = function(app) {
 
     $scope.deleteTown = function(town) {
       $scope.townsWarning = null;
-      townService.delete(town, $scope.token)
+      townService.delete(town)
         .then(() => {
           $scope.towns = $scope.towns.filter((el) => el._id !== town._id);
         }, handleError);
     };
 
     $scope.updateCheck = function(town) {
-      if (!$scope.token) return errorMsg('invalid token');
+      if (!salemAuth.getToken()) return errorMsg('invalid token');
       $scope.townsWarning = null;
       town.editing = true;
     };
 
     $scope.updateTown = function(town) {
-      townService.update(town, $scope.token)
+      townService.update(town)
         .then(() => {
           town.editing = false;
         }, (err) => {

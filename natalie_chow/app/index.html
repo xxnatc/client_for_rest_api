@@ -14,9 +14,9 @@
       </section>
     </header>
 
-    <main data-ng-controller="UsersController" class="container">
+    <main data-ng-controller="AuthController" class="container">
       <aside class="user-auth">
-        <section data-ng-if="!token">
+        <section data-ng-if="!username">
           <warning data-warning-text="authWarning"></warning>
 
           <user-form
@@ -34,8 +34,8 @@
           ></user-form>
         </section>
 
-        <section data-ng-if="token">
-          <p>Welcome, user!</p>
+        <section data-ng-if="username">
+          <p>Welcome, {{username}}!</p>
           <button data-ng-click="logout()" type="button" class="btn btn-default">Log out</button>
         </section>
       </aside>

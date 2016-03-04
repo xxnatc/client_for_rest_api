@@ -1,11 +1,12 @@
 var angular = require('angular');
 
 describe('Resource service', () => {
-  var $httpBackend, Resource;
+  var $httpBackend, Resource, salemAuth;
 
   beforeEach(angular.mock.module('salemApp'));
-  beforeEach(angular.mock.inject(function(_$httpBackend_, _Resource_) {
+  beforeEach(angular.mock.inject(function(_$httpBackend_, _salemAuth_, _Resource_) {
     $httpBackend = _$httpBackend_;
+    salemAuth = _salemAuth_;
     Resource = _Resource_;
   }));
 
@@ -18,9 +19,14 @@ describe('Resource service', () => {
   });
 
   describe('an instance of resource', () => {
+    var testToken;
     beforeEach(angular.mock.inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
     }));
+
+    beforeEach(() => {
+      testToken = salemAuth.getToken() || 'testingtoken';
+    })
 
     afterEach(() => {
       $httpBackend.verifyNoOutstandingExpectation();
@@ -57,11 +63,11 @@ describe('Resource service', () => {
       $httpBackend.expectPOST(
         'http://localhost:3000/api/test',
         { name: 'request bilbo' },
-        (headers) => headers.token === 'testingtoken'
+        (headers) => headers.token === testToken
       ).respond(200, { name: 'response bilbo' });
 
       var called = false;
-      Resource('/test').create({ name: 'request bilbo' }, 'testingtoken')
+      Resource('/test').create({ name: 'request bilbo' })
         .then((res) => {
           expect(res.data.name).toBe('response bilbo');
           called = true;
@@ -74,11 +80,11 @@ describe('Resource service', () => {
       $httpBackend.expectPUT(
         'http://localhost:3000/api/test/7',
         { name: 'test bilbo', _id: 7 },
-        (headers) => headers.token === 'testingtoken'
+        (headers) => headers.token === testToken
       ).respond(200, { msg: 'update success' });
 
       var called = false;
-      Resource('/test').update({ name: 'test bilbo', _id: 7 }, 'testingtoken')
+      Resource('/test').update({ name: 'test bilbo', _id: 7 })
         .then((res) => {
           expect(res.data.msg).toBe('update success');
           called = true;
@@ -90,11 +96,11 @@ describe('Resource service', () => {
     it('should be able to make a DELETE request', () => {
       $httpBackend.expectDELETE(
         'http://localhost:3000/api/test/12',
-        (headers) => headers.token === 'testingtoken'
+        (headers) => headers.token === testToken
       ).respond(200, { msg: 'delete success' });
 
       var called = false;
-      Resource('/test').delete({ _id: 12 }, 'testingtoken')
+      Resource('/test').delete({ _id: 12 })
         .then((res) => {
           expect(res.data.msg).toBe('delete success');
           called = true;
